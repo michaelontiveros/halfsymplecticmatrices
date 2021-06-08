@@ -36,7 +36,7 @@ renumber(H, i) =
   return(Hvec)
 }
 
-
+\\ H has rank 2
 {
 twoThree(H) =
   local(A, B, Anew, Bnew, Hnew);
@@ -50,3 +50,22 @@ twoThree(H) =
   Hnew = [Anew, Bnew];
   return(Hnew)
 }
+
+
+\\ H has rank 2
+{
+allTwoThree(H) = 
+  local(Hvec, Hvec1);
+  Hvec = renumber(H);
+  for(n = 1, #Hvec, 
+    Hvec[n] = twoThree(Hvec[n])
+  );
+  Hvec1 = [];
+  for(n = 1, #Hvec, 
+    Hvec1 = concat(Hvec1, renumber(Hvec[n]))
+  );
+  return(Hvec1)
+}
+
+
+
